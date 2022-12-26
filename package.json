@@ -1,0 +1,11 @@
+{
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon src/main"
+	},
+	"dependencies": {
+		"discord.js": "^14.7.1",
+		"dotenv": "^16.0.3"
+	}
+}
