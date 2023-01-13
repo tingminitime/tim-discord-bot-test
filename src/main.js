@@ -1,13 +1,19 @@
-// Require the necessary discord.js classes
-import { Client, Events, GatewayIntentBits } from 'discord.js'
+import fs from 'node:fs'
+import { Client, Collection, Events, GatewayIntentBits } from 'discord.js'
 import dotenv from 'dotenv'
+import handleCommands from './utils/handleCommands.js'
 
 dotenv.config({ path: './config.env' })
 
-console.log(process.env.TOKEN)
-
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
+
+client.commands = new Collection() // add Map()
+
+const commandFolders = fs.readdirSync('./src/commands')
+
+handleCommands(client)
+client.handleCommands(commandFolders, './src/commands')
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
